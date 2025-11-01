@@ -3,8 +3,8 @@ pipeline{
 
     environment{
         VENV_DIR = 'venv'
-        GCP_PROJECT = 'polynomial-text-474610-n0'
-        GCLOUD_PATH = '/var/jenkins_home/google-cloud-sdk/bin'
+        GCP_PROJECT = "polynomial-text-474610-n0"
+        GCLOUD_PATH = "/var/jenkins_home/google-cloud-sdk/bin"
 
     }
 
