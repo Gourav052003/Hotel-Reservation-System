@@ -3,12 +3,12 @@ pipeline{
 
     environment{
         VENV_DIR = 'venv'
+        GCP_PROJECT = 'polynomial-text-474610-n0'
+        GCLOUD_PATH = '/var/jenkins_home/google-cloud-sdk/bin'
 
     }
 
     stages{
-
-
 
 
         stage('cloninig github repo to jenkins container'){
@@ -21,12 +21,10 @@ pipeline{
         }
 
 
-
-
-        stage('loninig github repo to jenkins containe'){
+        stage('Python environment setup'){
             steps{
                  script{
-                    echo "loninig github repo to jenkins containe......................."
+                    echo 'Python environemnt is creating .......................'
                     sh '''
                         python -m venv ${VENV_DIR}
                         . ${VENV_DIR}/bin/activate
@@ -37,6 +35,26 @@ pipeline{
             }
         }
 
+
+
+
+        stage('Building and Pushing Docker Image to GCR'){
+            steps{
+                withCredentials([file(credentialsId: 'gcp-key', variable: 'GOOGLE_APPLICATION_CREDENTIALS')]){
+                    script{
+                        echo "Building and Pushing Docker Image to GCR......................."
+                        sh '''
+                            export PATH = $PATH:${GCLOUD_PATH}
+                            gcloud auth activate-service-account --key-file=${GOOGLE_APPLICATION_CREDENTIALS}
+                            gcloud config set project ${GCP_PROJECT}
+                            gcp auth configure-docker --quiet
+                            docker build -t gcr.io/${GCP_PROJECT}/hotel-reservation-system:latest .
+                            docker push gcr.io/${GCP_PROJECT}/hotel-reservation-system:latest
+                        '''
+                    }
+                }
+            }
+        }
 
 
 
