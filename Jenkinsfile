@@ -72,8 +72,7 @@ pipeline{
                             gcloud config set project ${GCP_PROJECT}
 
                             gcloud run deploy hotel-reservation-system \
-                            --image=gcr.io/${GCP_PROJECT}/hotel-reservation-system:latest \ 
-                            --platform=managed \
+                            --image=gcr.io/${GCP_PROJECT}/hotel-reservation-system:latest --platform=managed \
                             --region=us-central1 \
                             --allow-unauthenticated \
                         '''
