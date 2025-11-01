@@ -47,7 +47,7 @@ pipeline{
                             export PATH=$PATH:${GCLOUD_PATH}
                             gcloud auth activate-service-account --key-file=${GOOGLE_APPLICATION_CREDENTIALS}
                             gcloud config set project ${GCP_PROJECT}
-                            gcp auth configure-docker --quiet
+                            gcloud auth configure-docker --quiet
                             docker build -t gcr.io/${GCP_PROJECT}/hotel-reservation-system:latest .
                             docker push gcr.io/${GCP_PROJECT}/hotel-reservation-system:latest
                         '''
