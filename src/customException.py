@@ -11,7 +11,7 @@ class CustomException(Exception):
     @staticmethod
     def get_detailed_error_message(error_message,error_detail:sys):
 
-        _,_, execution_traceback = error_detail()
+        _,_, execution_traceback = traceback.sys.exc_info()
         file_name = execution_traceback.tb_frame.f_code.co_filename # filename in which error occured
         line_no = execution_traceback.tb_lineno # Line in which error occured
 
