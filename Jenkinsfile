@@ -29,7 +29,7 @@ pipeline{
                     echo "loninig github repo to jenkins containe......................."
                     sh '''
                         python -m venv ${VENV_DIR}
-                        . ${VENV_DIR}/Scripts/activate
+                        /${VENV_DIR}/Scripts/activate
                         pip install --upgrade pip 
                         pip install -e .
                     '''
