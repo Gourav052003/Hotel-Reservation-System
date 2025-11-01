@@ -1,8 +1,16 @@
 pipeline{
     agent any
 
+    environment{
+        VENV_DIR = 'venv'
+
+    }
 
     stages{
+
+
+
+
         stage('cloninig github repo to jenkins container'){
             steps{
                  script{
@@ -11,5 +19,26 @@ pipeline{
                  }
             }
         }
+
+
+
+
+        stage('loninig github repo to jenkins containe'){
+            steps{
+                 script{
+                    echo "loninig github repo to jenkins containe......................."
+                    sh '''
+                        python -m venv ${VENV_DIR}
+                        . ${VENV_DIR}/Scripts/activate
+                        pip install --upgrade pip 
+                        pip install -e .
+                    '''
+                 }
+            }
+        }
+
+
+
+
     }
 }
